@@ -1,5 +1,6 @@
 using System;
 using Xunit;
+using Moq;
 
 namespace SnakesAndLadders.Tests
 {
