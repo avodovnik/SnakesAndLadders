@@ -1,0 +1,5 @@
+// new game (dice)
+// create player : Player inside the game
+// Player.MakeTurn(); or game.PlayTurn(Player); -> Rolls the dice, moves the player
+
+// game completion event? 
