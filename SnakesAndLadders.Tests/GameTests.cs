@@ -10,14 +10,33 @@ namespace SnakesAndLadders.Tests
         [Fact]
         public void PlayersAddedAlwaysStartOnFirstPosition()
         {
-            var diceMock = new Mock<IDice>();
-            // diceMock.Setup(x => x.Roll().Return(new Mock<IDiceRoll>().Setup))
-//             var mock = new Mock<IFoo>();
-// mock.Setup(foo => foo.DoSomething("ping")).Returns(true);
+            var game = new Game(null);
 
-            var game = new Game();
             // when we add a player to the game
+            var player = game.CreatePlayer("Anze");
+
             // the player is automatically placed on position 1
+            Assert.Equal(1, player.Position);
+        }
+
+        [Fact]
+        public void PlayerCanMoveAcrossTheBoard()
+        {
+            var rollMock = new Mock<IDiceRoll>();
+            rollMock.SetupGet(x => x.Roll).Returns(10);
+
+            var diceMock = new Mock<IDice>();
+            diceMock.Setup(x => x.Roll()).Returns(rollMock.Object);
+
+            //Given
+            var game = new Game(diceMock.Object);
+            var player = game.CreatePlayer("Test Player");
+
+            //When
+            game.PlayTurn(player); 
+
+            //Then
+            Assert.Equal(11, player.Position);
         }
     }
 }

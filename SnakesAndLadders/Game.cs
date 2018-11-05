@@ -7,7 +7,7 @@ public class Game : IGame
     private const int BoardLength = 100; 
 
     private readonly IDice _dice;
-    private List<Player> _players;
+    private List<Player> _players = new List<Player>();
 
     public Game(IDice dice)
     {
