@@ -43,6 +43,7 @@ public class Game : IGame
         var newPosition = position.Location + roll.Roll;
         if(newPosition > BoardLength) {
             // TODO: trigger invalid move event
+            return;
         }
 
         // and if we can, check for events

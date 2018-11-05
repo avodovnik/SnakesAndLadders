@@ -19,11 +19,14 @@ namespace SnakesAndLadders.Tests
             Assert.Equal(1, player.Position);
         }
 
-        [Fact]
-        public void PlayerCanMoveAcrossTheBoard()
+        [Theory]
+        [InlineData(10, 11)]
+        [InlineData(50, 51)]
+        [InlineData(101, 1)]
+        public void PlayerCanMoveAcrossTheBoard(int diceRoll, int expectedPosition)
         {
             var rollMock = new Mock<IDiceRoll>();
-            rollMock.SetupGet(x => x.Roll).Returns(10);
+            rollMock.SetupGet(x => x.Roll).Returns(diceRoll);
 
             var diceMock = new Mock<IDice>();
             diceMock.Setup(x => x.Roll()).Returns(rollMock.Object);
@@ -36,7 +39,7 @@ namespace SnakesAndLadders.Tests
             game.PlayTurn(player); 
 
             //Then
-            Assert.Equal(11, player.Position);
+            Assert.Equal(expectedPosition, player.Position);
         }
     }
 }
