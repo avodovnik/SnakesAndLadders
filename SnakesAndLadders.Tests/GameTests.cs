@@ -20,10 +20,10 @@ namespace SnakesAndLadders.Tests
         }
 
         [Theory]
-        [InlineData(10, 11)]
-        [InlineData(50, 51)]
-        [InlineData(101, 1)]
-        public void PlayerCanMoveAcrossTheBoard(int diceRoll, int expectedPosition)
+        [InlineData(10, 11, true)]
+        [InlineData(50, 51, true)]
+        [InlineData(101, 1, false)]
+        public void PlayerCanMoveAcrossTheBoard(int diceRoll, int expectedPosition, bool isValidMove)
         {
             var rollMock = new Mock<IDiceRoll>();
             rollMock.SetupGet(x => x.Roll).Returns(diceRoll);
@@ -36,10 +36,11 @@ namespace SnakesAndLadders.Tests
             var player = game.CreatePlayer("Test Player");
 
             //When
-            game.PlayTurn(player);
+            var turnResult = game.PlayTurn(player);
 
             //Then
             Assert.Equal(expectedPosition, player.Position);
+            Assert.Equal(isValidMove, turnResult);
 
             // since we also mock the dice, we can use this place to verify that
             // the dice actually influences the behaviour of the game

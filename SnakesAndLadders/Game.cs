@@ -22,7 +22,7 @@ public class Game : IGame
         return player;
     }
 
-    public void PlayTurn(Player player)
+    public bool PlayTurn(Player player)
     {
         // the game won't be fun if there's another player trying to make their turn
         if (!_players.Contains(player))
@@ -34,16 +34,16 @@ public class Game : IGame
         var diceRoll = _dice.Roll();
 
         // and make the player move
-        this.MovePlayer(player, diceRoll);
+        return this.MovePlayer(player, diceRoll);
     }
 
-    private void MovePlayer(Player player, IDiceRoll roll)
+    private bool MovePlayer(Player player, IDiceRoll roll)
     {
         // check if the game is still playable
         if (!this.IsGameActive)
         {
-            // TODO: seriously consider returning a true/false for invalid moves
-            return;
+            // TODO: do we throw an invalid move here?
+            return false;
         }
 
         // get the player's position
@@ -53,7 +53,7 @@ public class Game : IGame
         if (newPosition > BoardLength)
         {
             OnInvalidMove?.Invoke(player, roll.Roll, newPosition);
-            return;
+            return false;
         }
 
         // and if we can, check for events
@@ -65,6 +65,7 @@ public class Game : IGame
 
         // update the player's position
         player.Position = new Position(newPosition);
+        return true;
     }
 
     public delegate void GameWon(Player player);
