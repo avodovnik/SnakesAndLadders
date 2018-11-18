@@ -36,7 +36,7 @@ namespace SnakesAndLadders.Tests
             var player = game.CreatePlayer("Test Player");
 
             //When
-            game.PlayTurn(player); 
+            game.PlayTurn(player);
 
             //Then
             Assert.Equal(expectedPosition, player.Position);
@@ -61,15 +61,24 @@ namespace SnakesAndLadders.Tests
             //Given
             var game = new Game(diceMock.Object);
             var player = game.CreatePlayer("Test Player");
+            var mre = new System.Threading.ManualResetEvent(false);
+
+            game.OnGameWon += new Game.GameWon((p) =>
+            {
+                Assert.Equal(player, p);
+                mre.Set();
+            });
 
             //When
-            game.PlayTurn(player); 
-            game.PlayTurn(player); 
-
+            game.PlayTurn(player);
+            game.PlayTurn(player);
 
             //Then
             Assert.Equal(100, player.Position);
-            
+            Assert.False(game.IsGameActive);
+
+            // We're only using this to make it easier for us to verify
+            mre.WaitOne(1000);
         }
     }
 }
