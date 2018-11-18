@@ -40,6 +40,36 @@ namespace SnakesAndLadders.Tests
 
             //Then
             Assert.Equal(expectedPosition, player.Position);
+
+            // since we also mock the dice, we can use this place to verify that
+            // the dice actually influences the behaviour of the game
+            diceMock.Verify(x => x.Roll(), Times.Once());
+        }
+
+        [Fact]
+        public void PlayerCanWinTheGame()
+        {
+            var rollMock = new Mock<IDiceRoll>();
+            rollMock.SetupSequence(x => x.Roll)
+                .Returns(96) // we start with 1! 
+                .Returns(3)
+                .Throws(new InvalidOperationException("Too many dice moves for this game."));
+
+            var diceMock = new Mock<IDice>();
+            diceMock.Setup(x => x.Roll()).Returns(rollMock.Object);
+
+            //Given
+            var game = new Game(diceMock.Object);
+            var player = game.CreatePlayer("Test Player");
+
+            //When
+            game.PlayTurn(player); 
+            game.PlayTurn(player); 
+
+
+            //Then
+            Assert.Equal(100, player.Position);
+            
         }
     }
 }
