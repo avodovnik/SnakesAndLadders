@@ -46,4 +46,4 @@ As the name implies, this event is triggered if the move is invalid, for example
 
 This section just contains a list of thoughts that came through my head as I was flying. I'll remove them from the document as I compelte more code.
 
-- The other option here, would be to design the players to actually "play" the game, and get invoked when it's their turn to play the game. So, the game would relinquish control to the player, to then make the next move. For ease of coding, I've opted for the simpler option of letting the caller/test dictate the game. Maybe for v2, I'll refactor it. :-)6
+- The other option here, would be to design the players to actually "play" the game, and get invoked when it's their turn to play the game. So, the game would relinquish control to the player, to then make the next move. For ease of coding, I've opted for the simpler option of letting the caller/test dictate the game. Maybe for v2, I'll refactor it. :-)
