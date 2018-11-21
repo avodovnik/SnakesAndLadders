@@ -26,7 +26,9 @@ Players are added to the game by invoking `game.CreatePlayer(name)`. This way, t
 
 > Each move of the game is triggered by also passing a reference to the player that has made the move. I did briefly consider doing it from the player itself, but I decided against it, because I wanted the game to contain the relevant state. Worst case, this can still be refactored later, if needed.
 
-### Events
+Interactions of players with the game, however, trigger events. 
+
+### Events
 
 At the moment, game events are implemented as actual events. While this is a bit more difficult to test, I feel it makes more sense as it represents the real-world more closely. Doing this also avoids requiring the caller to check state (i.e. if the game is still active or not, or if the player won). This also eases the potential for cheating code.
 
