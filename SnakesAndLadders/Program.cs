@@ -6,7 +6,7 @@ namespace SnakesAndLadders
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("I'm so sorry, but the logic for running the game is coming soon.");
         }
     }
 }
