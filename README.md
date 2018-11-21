@@ -47,3 +47,17 @@ As the name implies, this event is triggered if the move is invalid, for example
 This section just contains a list of thoughts that came through my head as I was flying. I'll remove them from the document as I compelte more code.
 
 - The other option here, would be to design the players to actually "play" the game, and get invoked when it's their turn to play the game. So, the game would relinquish control to the player, to then make the next move. For ease of coding, I've opted for the simpler option of letting the caller/test dictate the game. Maybe for v2, I'll refactor it. :-)
+
+## Running the Code
+
+The code is fairly simple, and actually not runnable at all, at the moment.
+
+To "test it" and see its behaviour, do the following:
+
+1. Pull down the code from GitHub (`git clone https://github.com/avodovnik/SnakesAndLadders.git`)
+2. do a `dotnet restore` (optional)
+3. run a `dotnet build` and/or `dotnet test`
+
+## Contribution Guidelines
+
+I absolutely value feedback, and everybody is welcome to contribute back by submitting a pull request or creating an issue. After all, what's the point of coding, if we're not learning?
